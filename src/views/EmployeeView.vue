@@ -6,7 +6,7 @@
       <div class="col" v-for="person in persons" :key="person.id">
         <div class="card h-100">
           <div class="card-body">
-            <h5 class="card-title">{{ person.vorname }} {{ person.nachname }}</h5>
+            <h5 class="card-title">{{ person.vorname}} {{ person.nachname }}</h5>
             <p class="card-text">
               {{ person.vorname }} {{ person.nachname }}
             </p>
@@ -26,7 +26,7 @@ export default {
     }
   },
   mounted () {
-    const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + 'api/mitarbeiter'
+    const endpoint = 'http://localhost:8080/api/mitarbeiter'
     const requestOptions = {
       method: 'GET',
       redirect: 'follow'
