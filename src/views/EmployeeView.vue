@@ -17,14 +17,16 @@
   </div>
   <employee-create-form></employee-create-form>
   <employee-update-form></employee-update-form>
+  <employee-delete-form></employee-delete-form>
 </template>
 
 <script>
 import EmployeeCreateForm from '@/components/EmployeeCreateForm'
 import EmployeeUpdateForm from '@/components/EmployeeUpdateForm'
+import EmployeeDeleteForm from '@/components/EmployeeDeleteForm'
 export default {
   name: 'EmployeeView',
-  components: { EmployeeUpdateForm, EmployeeCreateForm },
+  components: { EmployeeUpdateForm, EmployeeCreateForm, EmployeeDeleteForm },
   data () {
     return {
       persons: []

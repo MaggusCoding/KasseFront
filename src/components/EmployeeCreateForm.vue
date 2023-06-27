@@ -77,4 +77,7 @@ export default {
   padding: 10px 15px;
   border-radius: 30px;
 }
+.btn{
+  background-color: darkgreen;
+}
 </style>

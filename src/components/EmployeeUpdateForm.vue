@@ -1,20 +1,26 @@
 <template>
-  <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#employeeUpdate" aria-controls="employeeUpdate">Update existing employee
-  <i class="bi bi-person-plus-fill"> </i>
+  <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#employeeUpdate" aria-controls="employeeUpdate">
+    Update existing employee
+    <i class="bi bi-person-plus-fill"></i>
   </button>
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true"  tabindex="-1" id="employeeUpdate" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="employeeUpdate" aria-labelledby="offcanvasScrollingLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Update existing employee</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <h3>Select Employee</h3>
-      <select v-model="selectedEmployeeId">
-        <option v-for="employee in employees" :value="employee.id" :key="employee.id">
-          {{ employee.vorname }} {{ employee.nachname }}
-        </option>
-      </select>
-      <h3>Update Employee</h3>
+      <div class="form-group">
+        <label for="selectEmployeesUpdate" class="form-label">Select employee</label>
+        <div class="dropdown">
+          <select v-model="selectedEmployeeId" class="form-control dropdown-select">
+            <option v-for="employee in employees" :value="employee.id" :key="employee.id">
+              {{ employee.vorname }} {{ employee.nachname }}
+            </option>
+          </select>
+          <div class="dropdown-arrow"></div>
+        </div>
+      </div>
+      <label for="updateEmployees" class="form-label">New credentials employee</label>
       <form @submit.prevent="updateEmployee">
         <div class="mb-3">
           <label for="vorname" class="form-label">Vorname</label>
@@ -105,5 +111,27 @@ export default {
   right: 220px;
   padding: 10px 15px;
   border-radius: 30px;
+}
+.btn{
+  background-color: darkgreen;
+}
+.dropdown-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-position-x: 98%;
+  background-position-y: 50%;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  width: 0;
+  height: 0;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #aaa transparent transparent transparent;
+  pointer-events: none;
 }
 </style>
