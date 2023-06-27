@@ -1,32 +1,43 @@
 <template>
-    <h3>Select Employee</h3>
-    <select v-model="selectedEmployeeId">
-      <option v-for="employee in employees" :value="employee.id" :key="employee.id">
-        {{ employee.vorname }} {{ employee.nachname }}
-      </option>
-    </select>
-    <h3>Update Employee</h3>
-    <form @submit.prevent="updateEmployee">
-      <div class="mb-3">
-        <label for="vorname" class="form-label">Vorname</label>
-        <input type="text" class="form-control" id="vorname" v-model="updatedEmployee.vorname" required />
-      </div>
-      <div class="mb-3">
-        <label for="nachname" class="form-label">Nachname</label>
-        <input type="text" class="form-control" id="nachname" v-model="updatedEmployee.nachname" required />
-      </div>
-      <div class="mb-3">
-        <label for="studiengang" class="form-label">Studiengang</label>
-        <input
-          type="text"
-          class="form-control"
-          id="studiengang"
-          v-model="updatedEmployee.studiengang"
-          required
-        />
-      </div>
-      <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+  <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#employeeUpdate" aria-controls="employeeUpdate">Update existing employee
+  <i class="bi bi-person-plus-fill"> </i>
+  </button>
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true"  tabindex="-1" id="employeeUpdate" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Update existing employee</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <h3>Select Employee</h3>
+      <select v-model="selectedEmployeeId">
+        <option v-for="employee in employees" :value="employee.id" :key="employee.id">
+          {{ employee.vorname }} {{ employee.nachname }}
+        </option>
+      </select>
+      <h3>Update Employee</h3>
+      <form @submit.prevent="updateEmployee">
+        <div class="mb-3">
+          <label for="vorname" class="form-label">Vorname</label>
+          <input type="text" class="form-control" id="vorname" v-model="updatedEmployee.vorname" required />
+        </div>
+        <div class="mb-3">
+          <label for="nachname" class="form-label">Nachname</label>
+          <input type="text" class="form-control" id="nachname" v-model="updatedEmployee.nachname" required />
+        </div>
+        <div class="mb-3">
+          <label for="studiengang" class="form-label">Studiengang</label>
+          <input
+            type="text"
+            class="form-control"
+            id="studiengang"
+            v-model="updatedEmployee.studiengang"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -88,4 +99,11 @@ export default {
 </script>
 
 <style scoped>
+.sticky-button {
+  position: fixed;
+  bottom: 20px;
+  right: 220px;
+  padding: 10px 15px;
+  border-radius: 30px;
+}
 </style>

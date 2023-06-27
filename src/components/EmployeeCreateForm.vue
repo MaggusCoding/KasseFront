@@ -1,12 +1,10 @@
 <template>
-  <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Create new Employee
+  <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Create new employee
     <i class="bi bi-person-plus-fill"> </i>
   </button>
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-       aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Create new Employee</h5>
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Create new employee</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <form>
