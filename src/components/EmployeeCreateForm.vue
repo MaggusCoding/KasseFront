@@ -1,32 +1,35 @@
 <template>
-  <form>
-  <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Create new Employee
+  <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Create new Employee
     <i class="bi bi-person-plus-fill"> </i>
   </button>
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+       aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Create new Employee</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
+    <form>
     <div class="offcanvas-body">
-      <div class="mb-3">
-        <label for="vorname" class="form-label">Vorname</label>
-        <input type="text" class="form-control" id="vorname" placeholder="Vorname" v-model="vorname" required />
-      </div>
-      <div class="mb-3">
-        <label for="nachname" class="form-label">Nachname</label>
-        <input type="text" class="form-control" id="nachname" placeholder="Nachname" v-model="nachname" required />
-      </div>
-      <div class="mb-3">
-        <label for="studiengang" class="form-label">Studiengang</label>
-        <input type="text" class="form-control" id="studiengang" placeholder="Studiengang" v-model="studiengang" required />
-      </div>
-      <div class="m-auto">
-        <button type="submit" @click="createEmployee" class="btn btn-primary">Create</button>
-      </div>
+        <div class="mb-3">
+          <label for="vorname" class="form-label">Vorname</label>
+          <input type="text" class="form-control" id="vorname" placeholder="Vorname" v-model="vorname" required/>
+        </div>
+        <div class="mb-3">
+          <label for="nachname" class="form-label">Nachname</label>
+          <input type="text" class="form-control" id="nachname" placeholder="Nachname" v-model="nachname" required/>
+        </div>
+        <div class="mb-3">
+          <label for="studiengang" class="form-label">Studiengang</label>
+          <input type="text" class="form-control" id="studiengang" placeholder="Studiengang" v-model="studiengang"
+                 required/>
+        </div>
+        <div class="m-auto">
+          <button type="button" @click="createEmployee" class="btn btn-primary">Create</button>
+        </div>
     </div>
+    </form>
   </div>
-  </form>
 </template>
 
 <script>
@@ -60,13 +63,16 @@ export default {
 
       fetch(endpoint, requestOptions)
         .catch(error => console.log('error', error))
+        .then(() => {
+          window.location.reload()
+        })
     }
   }
 }
 </script>
 
 <style scoped>
-.sticky-button{
+.sticky-button {
   position: fixed;
   bottom: 20px;
   right: 20px;
