@@ -8,18 +8,21 @@
           <div class="card-body">
             <h5 class="card-title">{{ person.vorname}} {{ person.nachname }}</h5>
             <p class="card-text">
-              {{ person.vorname }} {{ person.nachname }}
+              {{ person.vorname }} {{ person.nachname }} {{ "studiert" }} {{ person.studiengang }}
             </p>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <employee-create-form></employee-create-form>
 </template>
 
 <script>
+import EmployeeCreateForm from '@/components/EmployeeCreateForm'
 export default {
   name: 'EmployeeView',
+  components: { EmployeeCreateForm },
   data () {
     return {
       persons: []
