@@ -3,12 +3,18 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import PricingView from '../views/PricingView.vue'
 import EmployeeView from '../views/EmployeeView.vue'
+import KassenbuchungView from '@/views/KassenbuchungView'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/kassenbuchung',
+    name: 'kassenbuchung',
+    component: KassenbuchungView
   },
   {
     path: '/about',

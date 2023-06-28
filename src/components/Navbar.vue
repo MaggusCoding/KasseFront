@@ -9,8 +9,9 @@
         <div class="navbar-nav">
           <router-link class="nav-link" to="/">Home</router-link>
           <router-link class="nav-link" to="/about">About</router-link>
-          <router-link class="nav-link" to="/pricing">Pricing</router-link>
+         <!-- <router-link class="nav-link" to="/pricing">Pricing</router-link> -->
           <router-link class="nav-link" to="/employee">Employee</router-link>
+          <router-link class="nav-link" to="/kassenbuchung">Cash Booking</router-link>
 <!--          <a class="nav-link active" aria-current="page" href="#">Home</a>-->
 <!--          <a class="nav-link" href="#">About</a>-->
 <!--          <a class="nav-link" href="#">Pricing</a>-->
