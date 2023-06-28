@@ -10,7 +10,7 @@
     </div>
     <div class="offcanvas-body">
       <div class="form-group">
-        <label for="selectEmployeesUpdate" class="form-label">Select employee</label>
+        <label for="selectEmployeesUpdate" class="form-label"><strong>Select employee</strong></label>
         <div class="dropdown">
           <select v-model="selectedEmployeeId" class="form-control dropdown-select">
             <option v-for="employee in employees" :value="employee.id" :key="employee.id">
@@ -20,7 +20,7 @@
           <div class="dropdown-arrow"></div>
         </div>
       </div>
-      <label for="updateEmployees" class="form-label">New credentials employee</label>
+      <label for="updateEmployees" class="form-label mt-3" id="updateForm"><strong>New credentials employee</strong></label>
       <form @submit.prevent="updateEmployee">
         <div class="mb-3">
           <label for="vorname" class="form-label">Vorname</label>
@@ -40,7 +40,7 @@
             required
           />
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary mt-3">Update</button>
       </form>
     </div>
   </div>
@@ -106,10 +106,7 @@ export default {
 
 <style scoped>
 .sticky-button {
-  position: fixed;
-  bottom: 20px;
-  right: 220px;
-  padding: 10px 15px;
+  padding: 12px 10px;
   border-radius: 30px;
 }
 .btn{

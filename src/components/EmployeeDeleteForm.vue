@@ -8,15 +8,20 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
+      <div class="form-group">
+      <div class="dropdown">
       <label for="selectEmployees" class="form-label">Select employee</label>
-      <select v-model="selectedEmployeeId">
+      <select v-model="selectedEmployeeId" class="form-control dropdown-select">
         <option v-for="employee in employees" :value="employee.id" :key="employee.id">
           {{ employee.vorname }} {{ employee.nachname }}
         </option>
       </select>
+      <div class="dropdown-arrow"></div>
       <form @submit.prevent="deleteEmployee">
-        <button type="submit" class="btn btn-primary">Confirm Deletion</button>
+        <button type="submit" class="btn btn-primary mt-3">Confirm Deletion</button>
       </form>
+    </div>
+  </div>
     </div>
   </div>
 </template>
@@ -79,13 +84,29 @@ export default {
 
 <style scoped>
 .sticky-button {
-  position: fixed;
-  bottom: 20px;
-  right: 450px;
-  padding: 10px 15px;
+  padding: 12px 10px;
   border-radius: 30px;
 }
 .btn{
   background-color: darkgreen;
+}
+.dropdown-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-position-x: 98%;
+  background-position-y: 50%;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: 40%;
+  right: 12px;
+  width: 0;
+  height: 0;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #aaa transparent transparent transparent;
+  pointer-events: none;
 }
 </style>

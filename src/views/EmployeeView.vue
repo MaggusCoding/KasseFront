@@ -1,7 +1,23 @@
 
 <template>
-  <h1>Unsere Mitarbeiter</h1>
-  <div class="container-fluid">
+  <div class="container-fluid bg-light-black">
+    <ul class="nav">
+      <img src="../assets/icons8-employee-60.png" class="img-fluid rounded-start" alt="...">
+      <li class="nav-item" style="margin-left: 1rem;">
+        <h1 class="display-6 mt-2">Employees</h1>
+      </li>
+      <li class="nav-item mt-2" style="margin-top: 2rem; margin-left: 1rem;">
+        <employee-create-form></employee-create-form>
+      </li>
+      <li class="nav-item mt-2" style="margin-top: 2rem; margin-left: 1rem;">
+        <employee-update-form></employee-update-form>
+      </li>
+      <li class="nav-item mt-2" style="margin-top: 2rem; margin-left: 1rem;">
+        <employee-delete-form></employee-delete-form>
+      </li>
+    </ul>
+    </div>
+  <div class="container-fluid" style="margin-top: 1rem;">
     <div class="row row-cols-1 row row-cols-md-4 g-4">
       <div class="col" v-for="person in persons" :key="person.id">
         <div class="card h-100">
@@ -15,9 +31,6 @@
       </div>
     </div>
   </div>
-  <employee-create-form></employee-create-form>
-  <employee-update-form></employee-update-form>
-  <employee-delete-form></employee-delete-form>
 </template>
 
 <script>
@@ -47,3 +60,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.container-fluid.bg-light-black {
+  background-color: rgba(0, 0, 0, 0.1); /* Adjust the opacity and color as needed */
+}
+</style>

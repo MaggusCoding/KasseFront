@@ -23,7 +23,7 @@
                  required/>
         </div>
         <div class="m-auto">
-          <button type="button" @click="createEmployee" class="btn btn-primary">Create</button>
+          <button type="button" @click="createEmployee" class="btn btn-primary mt-3">Create</button>
         </div>
     </div>
     </form>
@@ -71,10 +71,7 @@ export default {
 
 <style scoped>
 .sticky-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 15px;
+  padding: 12px 10px;
   border-radius: 30px;
 }
 .btn{
