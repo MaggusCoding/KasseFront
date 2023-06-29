@@ -15,7 +15,7 @@
             <select v-model="selectedKassenbuchung" class="form-select">
               <option disabled value="">Select Kassenbuchung</option>
               <option v-for="kassenbuchung in kassenbuchungen" :value="kassenbuchung.id" :key="kassenbuchung.id">
-                {{ formatTimestamp(kassenbuchung.timestamp) }} - {{ getMitarbeiterFullName(kassenbuchung.mitarbeiter_id) }}
+                {{ formatTimestamp(kassenbuchung.timestamp) }} - {{ getMitarbeiterFullName(kassenbuchung.mitarbeiter_id) }} - {{kassenbuchung.buchungsbetrag}}€
               </option>
             </select>
           </div>
