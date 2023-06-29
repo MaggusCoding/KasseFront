@@ -1,5 +1,18 @@
 <template>
-  <kassenbuchung-create-form></kassenbuchung-create-form>
+  <div class="container-fluid bg-light-black">
+    <ul class="nav">
+      <img src="../assets/cash.png" class="img-fluid rounded-start cash-icon" alt="...">
+      <li class="nav-item" style="margin-left: 1rem;">
+        <h1 class="display-6 mt-2">Cash Booking</h1>
+      </li>
+      <li class="nav-item mt-2" style="margin-top: 2rem; margin-left: 1rem;">
+        <kassenbuchung-create-form></kassenbuchung-create-form>
+      </li>
+      <li class="nav-item mt-2" style="margin-top: 2rem; margin-left: 1rem;">
+        <KassenbuchungUpdateFrom></KassenbuchungUpdateFrom>
+      </li>
+    </ul>
+  </div>
   <div class="container text-center">
     <div class="row align-items-start" v-for="kassenbuchung in kassenbuchungen" :key="kassenbuchung.mitarbeiter_id">
       <div class="col">
@@ -17,10 +30,10 @@
 
 <script>
 import KassenbuchungCreateForm from '@/components/KassenbuchungCreateForm'
-
+import KassenbuchungUpdateFrom from '@/components/KassenbuchungUpdateFrom'
 export default {
   name: 'KassenbuchungView',
-  components: { KassenbuchungCreateForm },
+  components: { KassenbuchungCreateForm, KassenbuchungUpdateFrom },
   data () {
     return {
       kassenbuchungen: [],
@@ -37,7 +50,7 @@ export default {
       fetch(endpoint)
         .then((response) => response.json())
         .then((data) => {
-          this.kassenbuchungen = data
+          this.kassenbuchungen = data.sort((a, b) => b.timestamp - a.timestamp)
         })
         .catch((error) => console.log('error', error))
     },
@@ -70,5 +83,11 @@ export default {
 }
 </script>
 <style scoped>
-
+.container-fluid.bg-light-black {
+  background-color: rgba(0, 0, 0, 0.1); /* Adjust the opacity and color as needed */
+}
+.cash-icon {
+  width: 4rem; /* Adjust the width as needed */
+  height: auto;
+}
 </style>

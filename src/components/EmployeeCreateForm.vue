@@ -1,32 +1,37 @@
 <template>
-  <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Create new employee
-    <i class="bi bi-person-plus-fill"> </i>
-  </button>
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Create new employee</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  <div>
+    <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Create new employee
+      <i class="bi bi-person-plus-fill"> </i>
+    </button>
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Create new employee</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <form @submit.prevent="createEmployee">
+        <div class="offcanvas-body">
+          <div class="mb-3">
+            <label for="vorname" class="form-label">Vorname</label>
+            <input type="text" class="form-control" id="vorname" placeholder="Vorname" v-model="vorname" required/>
+          </div>
+          <div class="mb-3">
+            <label for="nachname" class="form-label">Nachname</label>
+            <input type="text" class="form-control" id="nachname" placeholder="Nachname" v-model="nachname" required/>
+          </div>
+          <div class="mb-3">
+            <label for="studiengang" class="form-label">Studiengang</label>
+            <input type="text" class="form-control" id="studiengang" placeholder="Studiengang" v-model="studiengang"
+                   required/>
+          </div>
+          <div class="m-auto">
+            <button type="submit" class="btn btn-primary mt-3">Create</button>
+          </div>
+          <div v-if="createSuccess" class="alert alert-success mt-3" role="alert">
+            Employee created successfully!
+          </div>
+        </div>
+      </form>
     </div>
-    <form>
-    <div class="offcanvas-body">
-        <div class="mb-3">
-          <label for="vorname" class="form-label">Vorname</label>
-          <input type="text" class="form-control" id="vorname" placeholder="Vorname" v-model="vorname" required/>
-        </div>
-        <div class="mb-3">
-          <label for="nachname" class="form-label">Nachname</label>
-          <input type="text" class="form-control" id="nachname" placeholder="Nachname" v-model="nachname" required/>
-        </div>
-        <div class="mb-3">
-          <label for="studiengang" class="form-label">Studiengang</label>
-          <input type="text" class="form-control" id="studiengang" placeholder="Studiengang" v-model="studiengang"
-                 required/>
-        </div>
-        <div class="m-auto">
-          <button type="button" @click="createEmployee" class="btn btn-primary mt-3">Create</button>
-        </div>
-    </div>
-    </form>
   </div>
 </template>
 
@@ -37,11 +42,19 @@ export default {
     return {
       vorname: '',
       nachname: '',
-      studiengang: ''
+      studiengang: '',
+      createSuccess: false // Flag to track create success
     }
   },
   methods: {
     createEmployee () {
+      // Check if all required fields are filled
+      if (!this.vorname || !this.nachname || !this.studiengang) {
+        // Handle the validation error, e.g., display an error message
+        console.log('Please fill in all required fields.')
+        return
+      }
+
       const endpoint = 'http://localhost:8080/api/mitarbeiter'
       const headers = new Headers()
       headers.append('Content-Type', 'application/json')
@@ -60,10 +73,17 @@ export default {
       }
 
       fetch(endpoint, requestOptions)
-        .catch(error => console.log('error', error))
-        .then(() => {
-          window.location.reload()
+        .then(response => {
+          if (response.ok) {
+            this.createSuccess = true // Set create success flag
+            console.log('Employee created successfully')
+            // Perform any necessary actions after successful create
+          } else {
+            console.log('Failed to create employee')
+            // Handle the error scenario
+          }
         })
+        .catch(error => console.log('error', error))
     }
   }
 }

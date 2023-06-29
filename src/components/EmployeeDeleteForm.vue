@@ -11,7 +11,7 @@
       <div class="form-group">
       <div class="dropdown">
       <label for="selectEmployees" class="form-label">Select employee</label>
-      <select v-model="selectedEmployeeId" class="form-control dropdown-select">
+      <select v-model="selectedEmployeeId" class="form-select">
         <option v-for="employee in employees" :value="employee.id" :key="employee.id">
           {{ employee.vorname }} {{ employee.nachname }}
         </option>
@@ -89,24 +89,5 @@ export default {
 }
 .btn{
   background-color: darkgreen;
-}
-.dropdown-select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-position-x: 98%;
-  background-position-y: 50%;
-}
-
-.dropdown-arrow {
-  position: absolute;
-  top: 40%;
-  right: 12px;
-  width: 0;
-  height: 0;
-  border-width: 6px;
-  border-style: solid;
-  border-color: #aaa transparent transparent transparent;
-  pointer-events: none;
 }
 </style>

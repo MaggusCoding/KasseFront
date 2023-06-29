@@ -1,47 +1,52 @@
 <template>
-  <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#employeeUpdate" aria-controls="employeeUpdate">
-    Update existing employee
-    <i class="bi bi-person-plus-fill"></i>
-  </button>
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="employeeUpdate" aria-labelledby="offcanvasScrollingLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Update existing employee</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <div class="form-group">
-        <label for="selectEmployeesUpdate" class="form-label"><strong>Select employee</strong></label>
-        <div class="dropdown">
-          <select v-model="selectedEmployeeId" class="form-control dropdown-select">
-            <option v-for="employee in employees" :value="employee.id" :key="employee.id">
-              {{ employee.vorname }} {{ employee.nachname }}
-            </option>
-          </select>
-          <div class="dropdown-arrow"></div>
+  <div>
+    <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#employeeUpdate" aria-controls="employeeUpdate">
+      Update existing employee
+      <i class="bi bi-person-plus-fill"></i>
+    </button>
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="employeeUpdate" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Update existing employee</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="form-group">
+          <label for="selectEmployeesUpdate" class="form-label"><strong>Select employee</strong></label>
+          <div class="dropdown">
+            <select v-model="selectedEmployeeId" class="form-select">
+              <option v-for="employee in employees" :value="employee.id" :key="employee.id">
+                {{ employee.vorname }} {{ employee.nachname }}
+              </option>
+            </select>
+            <div class="dropdown-arrow"></div>
+          </div>
+        </div>
+        <label for="updateEmployees" class="form-label mt-3" id="updateForm"><strong>New credentials employee</strong></label>
+        <form @submit.prevent="updateEmployee">
+          <div class="mb-3">
+            <label for="vorname" class="form-label">Vorname</label>
+            <input type="text" class="form-control" id="vorname" v-model="updatedEmployee.vorname" required />
+          </div>
+          <div class="mb-3">
+            <label for="nachname" class="form-label">Nachname</label>
+            <input type="text" class="form-control" id="nachname" v-model="updatedEmployee.nachname" required />
+          </div>
+          <div class="mb-3">
+            <label for="studiengang" class="form-label">Studiengang</label>
+            <input
+              type="text"
+              class="form-control"
+              id="studiengang"
+              v-model="updatedEmployee.studiengang"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Update</button>
+        </form>
+        <div v-if="updateSuccess" class="alert alert-success mt-3" role="alert">
+          Employee updated successfully!
         </div>
       </div>
-      <label for="updateEmployees" class="form-label mt-3" id="updateForm"><strong>New credentials employee</strong></label>
-      <form @submit.prevent="updateEmployee">
-        <div class="mb-3">
-          <label for="vorname" class="form-label">Vorname</label>
-          <input type="text" class="form-control" id="vorname" v-model="updatedEmployee.vorname" required />
-        </div>
-        <div class="mb-3">
-          <label for="nachname" class="form-label">Nachname</label>
-          <input type="text" class="form-control" id="nachname" v-model="updatedEmployee.nachname" required />
-        </div>
-        <div class="mb-3">
-          <label for="studiengang" class="form-label">Studiengang</label>
-          <input
-            type="text"
-            class="form-control"
-            id="studiengang"
-            v-model="updatedEmployee.studiengang"
-            required
-          />
-        </div>
-        <button type="submit" class="btn btn-primary mt-3">Update</button>
-      </form>
     </div>
   </div>
 </template>
@@ -57,7 +62,8 @@ export default {
         vorname: '',
         nachname: '',
         studiengang: ''
-      }
+      },
+      updateSuccess: false // Flag to track update success
     }
   },
   mounted () {
@@ -93,9 +99,12 @@ export default {
       fetch(endpoint, requestOptions)
         .then(response => {
           if (response.ok) {
+            this.updateSuccess = true // Set update success flag
             console.log('Employee updated successfully')
+            // Perform any necessary actions after successful update
           } else {
             console.log('Failed to update employee')
+            // Handle the error scenario
           }
         })
         .catch(error => console.log('error', error))
@@ -109,26 +118,7 @@ export default {
   padding: 12px 10px;
   border-radius: 30px;
 }
-.btn{
+.btn {
   background-color: darkgreen;
-}
-.dropdown-select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-position-x: 98%;
-  background-position-y: 50%;
-}
-
-.dropdown-arrow {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  width: 0;
-  height: 0;
-  border-width: 6px;
-  border-style: solid;
-  border-color: #aaa transparent transparent transparent;
-  pointer-events: none;
 }
 </style>
