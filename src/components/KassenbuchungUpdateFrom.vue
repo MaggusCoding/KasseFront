@@ -68,7 +68,14 @@ export default {
   methods: {
     fetchKassenbuchungen () {
       const endpoint = 'http://localhost:8080/api/kassenbuchung'
-      fetch(endpoint)
+      const myHeaders = new Headers()
+      const user = JSON.parse(localStorage.getItem('user'))
+      myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
+      myHeaders.append('Content-Type', 'application/json')
+      fetch(endpoint, {
+        method: 'GET',
+        headers: myHeaders
+      })
         .then(response => response.json())
         .then(data => {
           this.kassenbuchungen = data
@@ -77,7 +84,14 @@ export default {
     },
     fetchMitarbeiter () {
       const endpoint = 'http://localhost:8080/api/mitarbeiter'
-      fetch(endpoint)
+      const myHeaders = new Headers()
+      const user = JSON.parse(localStorage.getItem('user'))
+      myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
+      myHeaders.append('Content-Type', 'application/json')
+      fetch(endpoint, {
+        method: 'GET',
+        headers: myHeaders
+      })
         .then(response => response.json())
         .then(data => {
           this.mitarbeiterData = data.reduce((map, mitarbeiter) => {
@@ -99,13 +113,17 @@ export default {
       return new Date(timestamp * 1000).toLocaleString('en-GB', options)
     },
     updateKassenbuchung () {
+      const myHeaders = new Headers()
+      const user = JSON.parse(localStorage.getItem('user'))
+      myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
+      myHeaders.append('Content-Type', 'application/json')
       const endpoint = `http://localhost:8080/api/kassenbuchung/${this.selectedKassenbuchung}`
       const payload = {
         buchungsbetrag: this.updatedKassenbuchung.buchungsbetrag
       }
       fetch(endpoint, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: myHeaders,
         body: JSON.stringify(payload)
       })
         .then(response => {
@@ -121,8 +139,17 @@ export default {
         .catch(error => console.log('Error occurred while updating Kassenbuchung', error))
     },
     fetchEmployees () {
+      const myHeaders = new Headers()
+      const user = JSON.parse(localStorage.getItem('user'))
+      myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
+      myHeaders.append('Content-Type', 'application/json')
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      }
       const endpoint = 'http://localhost:8080/api/mitarbeiter'
-      fetch(endpoint)
+      fetch(endpoint, requestOptions)
         .then(response => response.json())
         .then(data => {
           this.employees = data

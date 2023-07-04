@@ -57,6 +57,8 @@ export default {
 
       const endpoint = 'http://localhost:8080/api/mitarbeiter'
       const headers = new Headers()
+      const user = JSON.parse(localStorage.getItem('user'))
+      headers.append('Authorization', 'Bearer ' + user.accessToken)
       headers.append('Content-Type', 'application/json')
 
       const payload = JSON.stringify({

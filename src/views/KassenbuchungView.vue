@@ -31,6 +31,7 @@
 <script>
 import KassenbuchungCreateForm from '@/components/KassenbuchungCreateForm'
 import KassenbuchungUpdateFrom from '@/components/KassenbuchungUpdateFrom'
+// import authHeader from '~/auth-header'
 export default {
   name: 'KassenbuchungView',
   components: { KassenbuchungCreateForm, KassenbuchungUpdateFrom },
@@ -46,8 +47,16 @@ export default {
   },
   methods: {
     fetchKassenbuchungen () {
+      const user = JSON.parse(localStorage.getItem('user'))
+      const myHeaders = new Headers()
+      myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      }
       const endpoint = 'http://localhost:8080/api/kassenbuchung'
-      fetch(endpoint)
+      fetch(endpoint, requestOptions)
         .then((response) => response.json())
         .then((data) => {
           this.kassenbuchungen = data.sort((a, b) => b.timestamp - a.timestamp)
@@ -56,7 +65,15 @@ export default {
     },
     fetchMitarbeiter () {
       const endpoint = 'http://localhost:8080/api/mitarbeiter'
-      fetch(endpoint)
+      const user = JSON.parse(localStorage.getItem('user'))
+      const myHeaders = new Headers()
+      myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      }
+      fetch(endpoint, requestOptions)
         .then((response) => response.json())
         .then((data) => {
           // Create a map of mitarbeiter_id to Mitarbeiter object

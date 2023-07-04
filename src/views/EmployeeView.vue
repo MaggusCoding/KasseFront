@@ -37,6 +37,7 @@
 import EmployeeCreateForm from '@/components/EmployeeCreateForm'
 import EmployeeUpdateForm from '@/components/EmployeeUpdateForm'
 import EmployeeDeleteForm from '@/components/EmployeeDeleteForm'
+// import authHeader from '@/services/auth-header'
 export default {
   name: 'EmployeeView',
   components: { EmployeeUpdateForm, EmployeeCreateForm, EmployeeDeleteForm },
@@ -46,12 +47,15 @@ export default {
     }
   },
   mounted () {
-    const endpoint = 'http://localhost:8080/api/mitarbeiter'
+    const myHeaders = new Headers()
+    const user = JSON.parse(localStorage.getItem('user'))
+    myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
     const requestOptions = {
       method: 'GET',
+      headers: myHeaders,
       redirect: 'follow'
     }
-    fetch(endpoint, requestOptions)
+    fetch('http://localhost:8080/api/mitarbeiter', requestOptions)
       .then(response => response.json())
       .then(result => result.forEach(person => {
         this.persons.push(person)

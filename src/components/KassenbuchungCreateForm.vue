@@ -58,8 +58,16 @@ export default {
   },
   methods: {
     fetchEmployees () {
+      const myHeaders = new Headers()
+      const user = JSON.parse(localStorage.getItem('user'))
+      myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      }
       const endpoint = 'http://localhost:8080/api/mitarbeiter'
-      fetch(endpoint)
+      fetch(endpoint, requestOptions)
         .then(response => response.json())
         .then(data => {
           this.employees = data
@@ -77,9 +85,13 @@ export default {
         mitarbeiter_id: this.selectedEmployeeId,
         buchungsbetrag: this.buchungsbetrag
       }
+      const headers = new Headers()
+      const user = JSON.parse(localStorage.getItem('user'))
+      headers.append('Authorization', 'Bearer ' + user.accessToken)
+      headers.append('Content-Type', 'application/json')
       const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: headers,
         body: JSON.stringify(payload)
       }
       fetch(endpoint, requestOptions)

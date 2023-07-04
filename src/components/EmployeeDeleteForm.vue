@@ -45,8 +45,16 @@ export default {
   },
   methods: {
     fetchEmployees () {
+      const myHeaders = new Headers()
+      const user = JSON.parse(localStorage.getItem('user'))
+      myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
+      const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+      }
       const endpoint = 'http://localhost:8080/api/mitarbeiter'
-      fetch(endpoint)
+      fetch(endpoint, requestOptions)
         .then(response => response.json())
         .then(data => {
           this.employees = data
@@ -57,14 +65,17 @@ export default {
       if (!this.selectedEmployeeId) {
         return // No employee selected, do nothing
       }
-
+      const headers = new Headers()
+      const user = JSON.parse(localStorage.getItem('user'))
+      headers.append('Authorization', 'Bearer ' + user.accessToken)
+      headers.append('Content-Type', 'application/json')
       const endpoint = `http://localhost:8080/api/mitarbeiter/${this.selectedEmployeeId}`
       const payload = {
         id: this.selectedEmployeeId
       }
       const requestOptions = {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: headers,
         body: JSON.stringify(payload)
       }
 
