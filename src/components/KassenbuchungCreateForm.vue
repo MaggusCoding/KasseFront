@@ -6,7 +6,7 @@
     </button>
     <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="kassenbuchung" aria-labelledby="offcanvasWithBothOptionsLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Create new employee</h5>
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Create new cash booking</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <form @submit.prevent="createKassenbuchung">
@@ -30,6 +30,10 @@
             <label for="bookingamount" class="form-label">Booking amount (€)</label>
             <input type="number" class="form-control" id="bookingamount" placeholder="Booking amount" v-model="buchungsbetrag" required/>
           </div>
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="bookingamount" placeholder="Comment" v-model="comment" required/>
+          </div>
           <div class="m-auto">
             <button type="submit" class="btn btn-primary mt-3">Create</button>
           </div>
@@ -50,7 +54,8 @@ export default {
       employees: [], // Array of employees fetched from the backend
       selectedEmployeeId: null, // ID of the selected employee
       buchungsbetrag: null,
-      createSuccess: false // Flag to track create success
+      createSuccess: false, // Flag to track create success
+      comment: ''
     }
   },
   mounted () {
@@ -83,7 +88,8 @@ export default {
       const endpoint = 'http://localhost:8080/api/kassenbuchung'
       const payload = {
         mitarbeiter_id: this.selectedEmployeeId,
-        buchungsbetrag: this.buchungsbetrag
+        buchungsbetrag: this.buchungsbetrag,
+        comment: this.comment
       }
       const headers = new Headers()
       const user = JSON.parse(localStorage.getItem('user'))

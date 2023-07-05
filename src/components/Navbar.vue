@@ -9,12 +9,16 @@
         <div class="navbar-nav">
           <router-link class="nav-link" to="/">Home</router-link>
           <router-link class="nav-link" to="/about">About</router-link>
-         <!-- <router-link class="nav-link" to="/pricing">Pricing</router-link> -->
-          <router-link class="nav-link" to="/employee">Employee</router-link>
-          <router-link class="nav-link" to="/kassenbuchung">Cash Booking</router-link>
-<!--          <a class="nav-link active" aria-current="page" href="#">Home</a>-->
-<!--          <a class="nav-link" href="#">About</a>-->
-<!--          <a class="nav-link" href="#">Pricing</a>-->
+          <router-link v-if="currentUser" class="nav-link" to="/employee">Employee</router-link>
+          <router-link v-if="currentUser" class="nav-link" to="/kassenbuchung">Cash Booking</router-link>
+          <router-link v-if="currentUser" class="nav-link" to="/dashboard">Dashboard</router-link>
+        </div>
+        <div class="navbar-nav ms-auto">
+          <router-link v-if="!currentUser" class="nav-link" to="/login">Login</router-link>
+          <router-link class="nav-link" to="/register">Sign up</router-link>
+          <a class="nav-link" @click.prevent="logOut" v-if="currentUser">
+            Logout
+          </a>
         </div>
       </div>
     </div>
@@ -23,8 +27,18 @@
 
 <script>
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Navbar'
+  name: 'Navbar',
+  computed: {
+    currentUser () {
+      return this.$store.state.auth.user
+    }
+  },
+  methods: {
+    logOut () {
+      this.$store.dispatch('auth/logout')
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

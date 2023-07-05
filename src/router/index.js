@@ -4,12 +4,30 @@ import AboutView from '../views/AboutView.vue'
 import PricingView from '../views/PricingView.vue'
 import EmployeeView from '../views/EmployeeView.vue'
 import KassenbuchungView from '@/views/KassenbuchungView'
+import Login from '@/views/Login'
+import Register from '@/views/Register'
+import KassenbuchungDashboard from '@/views/KassenbuchungDashboard'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: KassenbuchungDashboard
   },
   {
     path: '/kassenbuchung',

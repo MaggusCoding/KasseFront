@@ -14,7 +14,21 @@
     </ul>
   </div>
   <div class="container text-center">
-    <div class="row align-items-start" v-for="kassenbuchung in kassenbuchungen" :key="kassenbuchung.mitarbeiter_id">
+    <div class="row align-items-start">
+      <div class="col">
+        <strong>Date</strong>
+      </div>
+      <div class="col">
+        <strong>Team Member</strong>
+      </div>
+      <div class="col">
+        <strong>Booking Amount</strong>
+      </div>
+      <div class="col">
+        <strong>Comment</strong>
+      </div>
+    </div>
+    <div class="row align-items-start" v-for="kassenbuchung in kassenbuchungen" :key="kassenbuchung.id">
       <div class="col">
         {{ formatTimestamp(kassenbuchung.timestamp) }}
       </div>
@@ -23,6 +37,9 @@
       </div>
       <div class="col">
         {{ kassenbuchung.buchungsbetrag }}€
+      </div>
+      <div class="col">
+        {{ kassenbuchung.comment }}
       </div>
     </div>
   </div>

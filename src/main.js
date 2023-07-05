@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import store from './store'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
+import VueApexCharts from 'vue3-apexcharts'
 import {
   faHome,
   faUser,
@@ -16,4 +17,4 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faHome, faUser, faUserPlus, faSignInAlt, faSignOutAlt)
-createApp(App).use(store).use(ValidationOptions).use(router).use(store).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
+createApp(App).use(VueApexCharts).use(store).use(ValidationOptions).use(router).use(store).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
