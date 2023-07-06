@@ -1,29 +1,32 @@
 <template>
   <button class="btn btn-success sticky-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#employeeDelete" aria-controls="employeeDelete">Delete existing employee
-  <i class="bi bi-person-plus-fill"> </i>
+    <i class="bi bi-person-plus-fill"> </i>
   </button>
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true"  tabindex="-1" id="employeeDelete" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="employeeDelete" aria-labelledby="offcanvasScrollingLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Delete existing employee</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
       <div class="form-group">
-      <div class="dropdown">
-      <label for="selectEmployees" class="form-label">Select employee</label>
-      <select v-model="selectedEmployeeId" class="form-select">
-        <option v-for="employee in employees" :value="employee.id" :key="employee.id">
-          {{ employee.vorname }} {{ employee.nachname }}
-        </option>
-      </select>
-      <div class="dropdown-arrow"></div>
-      <form @submit.prevent="deleteEmployee">
-        <button type="submit" class="btn btn-primary mt-3">Confirm Deletion</button>
-      </form>
+        <div class="dropdown">
+          <label for="selectEmployees" class="form-label">Select employee</label>
+          <select v-model="selectedEmployeeId" class="form-select">
+            <option v-for="employee in employees" :value="employee.id" :key="employee.id">
+              {{ employee.vorname }} {{ employee.nachname }}
+            </option>
+          </select>
+          <div class="dropdown-arrow"></div>
+          <form @submit.prevent="deleteEmployee">
+            <button type="submit" class="btn btn-primary mt-3">Confirm Deletion</button>
+          </form>
+        </div>
+        <div v-if="createSuccess" class="alert alert-danger mt-3" role="alert">
+          {{error}}
+        </div>
+        </div>
+      </div>
     </div>
-  </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -33,11 +36,14 @@ export default {
     return {
       employees: [], // Array of employees fetched from the backend
       selectedEmployeeId: null, // ID of the selected employee
-      updatedEmployee: { // Object to hold the updated employee data
+      updatedEmployee: {
+        // Object to hold the updated employee data
         vorname: '',
         nachname: '',
         studiengang: ''
-      }
+      },
+      error: null, // Error message for deletion failure
+      createSuccess: null
     }
   },
   mounted () {
@@ -82,12 +88,20 @@ export default {
       fetch(endpoint, requestOptions)
         .then(response => {
           if (response.ok) {
-            console.log('Employee delted successfully')
+            console.log('Employee deleted successfully')
+            this.error = 'Team member deleted successfully.'
+            this.$router.go()
           } else {
             console.log('Failed to delete employee')
+            this.error =
+              'Team member already created a cash booking, deletion not possible.'
+            this.createSuccess = true
           }
         })
-        .catch(error => console.log('error', error))
+        .catch(error => {
+          console.log('error', error)
+          this.error = 'An error occurred during deletion.'
+        })
     }
   }
 }
@@ -98,7 +112,7 @@ export default {
   padding: 12px 10px;
   border-radius: 30px;
 }
-.btn{
+.btn {
   background-color: darkgreen;
 }
 </style>

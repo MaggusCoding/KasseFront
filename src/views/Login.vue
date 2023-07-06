@@ -5,7 +5,8 @@
         id="profile-img"
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
         class="profile-img-card"
-       alt=""/>
+        alt=""
+      />
       <form name="form" @submit.prevent="handleLogin">
         <div class="form-group">
           <label for="username">Username</label>
@@ -15,10 +16,9 @@
             class="form-control"
             name="username"
           />
-          <div
-            class="alert alert-danger"
-            role="alert"
-          >Username is required!</div>
+          <div v-if="formErrors.username" class="alert alert-danger" role="alert">
+            {{ formErrors.username }}
+          </div>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -28,10 +28,9 @@
             class="form-control"
             name="password"
           />
-          <div
-            class="alert alert-danger"
-            role="alert"
-          >Password is required!</div>
+          <div v-if="formErrors.password" class="alert alert-danger" role="alert">
+            {{ formErrors.password }}
+          </div>
         </div>
         <div class="form-group">
           <button class="btn btn-primary btn-block" :disabled="loading">
@@ -40,6 +39,9 @@
           </button>
         </div>
         <div class="form-group">
+          <div v-if="message" class="alert alert-danger" role="alert">
+            {{ message }}
+          </div>
         </div>
       </form>
     </div>
@@ -55,7 +57,8 @@ export default {
     return {
       user: new User('', ''),
       loading: false,
-      message: ''
+      message: '',
+      formErrors: {}
     }
   },
   computed: {
@@ -71,6 +74,8 @@ export default {
   methods: {
     handleLogin () {
       this.loading = true
+      this.formErrors = {}
+
       if (this.user.username && this.user.password) {
         this.$store.dispatch('auth/login', this.user).then(
           () => {
@@ -78,12 +83,24 @@ export default {
           },
           error => {
             this.loading = false
-            this.message =
+            if (error.response && error.response.status === 401) {
+              this.message = 'Invalid username or password'
+            } else {
+              this.message =
                 (error.response && error.response.data) ||
                 error.message ||
                 error.toString()
+            }
           }
         )
+      } else {
+        if (!this.user.username) {
+          this.formErrors.username = 'Username is required'
+        }
+        if (!this.user.password) {
+          this.formErrors.password = 'Password is required'
+        }
+        this.loading = false
       }
     }
   }

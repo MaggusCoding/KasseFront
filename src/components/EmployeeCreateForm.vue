@@ -79,7 +79,7 @@ export default {
           if (response.ok) {
             this.createSuccess = true // Set create success flag
             console.log('Employee created successfully')
-            // Perform any necessary actions after successful create
+            this.$router.go()
           } else {
             console.log('Failed to create employee')
             // Handle the error scenario

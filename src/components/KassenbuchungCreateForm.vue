@@ -105,6 +105,7 @@ export default {
           if (response.ok) {
             this.createSuccess = true // Set create success flag
             console.log('Cash booking created successfully')
+            this.$router.go()
             // Perform any necessary actions after successful creation
           } else {
             console.log('Failed to create cash booking')

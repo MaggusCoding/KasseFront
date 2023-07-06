@@ -113,7 +113,7 @@ export default {
           if (response.ok) {
             this.updateSuccess = true // Set update success flag
             console.log('Employee updated successfully')
-            // Perform any necessary actions after successful update
+            this.$router.go()
           } else {
             console.log('Failed to update employee')
             // Handle the error scenario
