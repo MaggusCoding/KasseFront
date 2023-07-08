@@ -72,7 +72,7 @@ export default {
         headers: myHeaders,
         redirect: 'follow'
       }
-      const endpoint = 'http://tresebackendinternal.railway.internal/api/kassenbuchung'
+      const endpoint = 'https://tresebackend.up.railway.app/api/kassenbuchung'
       fetch(endpoint, requestOptions)
         .then((response) => response.json())
         .then((data) => {
@@ -81,7 +81,7 @@ export default {
         .catch((error) => console.log('error', error))
     },
     fetchMitarbeiter () {
-      const endpoint = 'http://tresebackendinternal.railway.internal/api/mitarbeiter'
+      const endpoint = 'https://tresebackend.up.railway.app/api/mitarbeiter'
       const user = JSON.parse(localStorage.getItem('user'))
       const myHeaders = new Headers()
       myHeaders.append('Authorization', 'Bearer ' + user.accessToken)

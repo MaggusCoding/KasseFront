@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     fetchKassenbuchungen () {
-      const endpoint = 'http://tresebackendinternal.railway.internal/api/kassenbuchung'
+      const endpoint = 'https://tresebackend.up.railway.app/api/kassenbuchung'
       const myHeaders = new Headers()
       const user = JSON.parse(localStorage.getItem('user'))
       myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
@@ -83,7 +83,7 @@ export default {
         .catch(error => console.log('error', error))
     },
     fetchMitarbeiter () {
-      const endpoint = 'http://tresebackendinternal.railway.internal/api/mitarbeiter'
+      const endpoint = 'https://tresebackend.up.railway.app/api/mitarbeiter'
       const myHeaders = new Headers()
       const user = JSON.parse(localStorage.getItem('user'))
       myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
@@ -117,7 +117,7 @@ export default {
       const user = JSON.parse(localStorage.getItem('user'))
       myHeaders.append('Authorization', 'Bearer ' + user.accessToken)
       myHeaders.append('Content-Type', 'application/json')
-      const endpoint = `http://tresebackendinternal.railway.internal/api/kassenbuchung/${this.selectedKassenbuchung}`
+      const endpoint = `https://tresebackend.up.railway.app/api/kassenbuchung/${this.selectedKassenbuchung}`
       const payload = {
         buchungsbetrag: this.updatedKassenbuchung.buchungsbetrag
       }
@@ -148,7 +148,7 @@ export default {
         headers: myHeaders,
         redirect: 'follow'
       }
-      const endpoint = 'http://tresebackendinternal.railway.internal/api/mitarbeiter'
+      const endpoint = 'https://tresebackend.up.railway.app/api/mitarbeiter'
       fetch(endpoint, requestOptions)
         .then(response => response.json())
         .then(data => {

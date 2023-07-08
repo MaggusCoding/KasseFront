@@ -34,7 +34,7 @@ export default {
         headers: myHeaders,
         redirect: 'follow'
       }
-      const endpoint = 'http://tresebackendinternal.railway.internal/api/kassenbuchung/monthly'
+      const endpoint = 'https://tresebackend.up.railway.app/api/kassenbuchung/monthly'
       fetch(endpoint, requestOptions)
         .then((response) => response.json())
         .then((data) => {

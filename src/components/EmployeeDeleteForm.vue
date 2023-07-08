@@ -59,7 +59,7 @@ export default {
         headers: myHeaders,
         redirect: 'follow'
       }
-      const endpoint = 'http://tresebackendinternal.railway.internal/api/mitarbeiter'
+      const endpoint = 'https://tresebackend.up.railway.app/api/mitarbeiter'
       fetch(endpoint, requestOptions)
         .then(response => response.json())
         .then(data => {
@@ -75,7 +75,7 @@ export default {
       const user = JSON.parse(localStorage.getItem('user'))
       headers.append('Authorization', 'Bearer ' + user.accessToken)
       headers.append('Content-Type', 'application/json')
-      const endpoint = `http://tresebackendinternal.railway.internal/api/mitarbeiter/${this.selectedEmployeeId}`
+      const endpoint = `https://tresebackend.up.railway.app/api/mitarbeiter/${this.selectedEmployeeId}`
       const payload = {
         id: this.selectedEmployeeId
       }
