@@ -23,16 +23,15 @@ class AuthService {
   }
 
   register (user) {
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + user.accessToken
-      }
-    }
     return axios.post(API_URL + 'signup', {
       username: user.username,
       email: user.email,
       password: user.password
-    }, config)
+    }, {
+      headers: {
+        Authorization: 'Bearer ' + user.accessToken // eslint-disable-line
+      }
+    })
   }
 }
 
