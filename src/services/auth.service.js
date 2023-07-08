@@ -23,13 +23,14 @@ class AuthService {
   }
 
   register (user) {
+    const userToken = JSON.parse(localStorage.getItem('user'))
     return axios.post(API_URL + 'signup', {
       username: user.username,
       email: user.email,
       password: user.password
     }, {
       headers: {
-        'Authorization': 'Bearer ' + user.accessToken // eslint-disable-line
+        Authorization: 'Bearer ' + userToken.accessToken
       }
     })
   }
