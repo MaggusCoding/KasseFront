@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://tresebackendinternal.railway.internal/api/auth/'
+const API_URL = 'https://tresebackend.up.railway.app/api/auth/'
 
 class AuthService {
   login (user) {
