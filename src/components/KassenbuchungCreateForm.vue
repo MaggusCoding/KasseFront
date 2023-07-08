@@ -71,7 +71,7 @@ export default {
         headers: myHeaders,
         redirect: 'follow'
       }
-      const endpoint = 'http://localhost:8080/api/mitarbeiter'
+      const endpoint = 'http://tresebackendinternal.railway.internal/api/mitarbeiter'
       fetch(endpoint, requestOptions)
         .then(response => response.json())
         .then(data => {
@@ -85,7 +85,7 @@ export default {
         console.log('Please fill in all required fields.')
         return
       }
-      const endpoint = 'http://localhost:8080/api/kassenbuchung'
+      const endpoint = 'http://tresebackendinternal.railway.internal/api/kassenbuchung'
       const payload = {
         mitarbeiter_id: this.selectedEmployeeId,
         buchungsbetrag: this.buchungsbetrag,

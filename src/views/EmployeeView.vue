@@ -55,7 +55,7 @@ export default {
       headers: myHeaders,
       redirect: 'follow'
     }
-    fetch('http://localhost:8080/api/mitarbeiter', requestOptions)
+    fetch('http://tresebackendinternal.railway.internal/api/mitarbeiter', requestOptions)
       .then(response => response.json())
       .then(result => result.forEach(person => {
         this.persons.push(person)

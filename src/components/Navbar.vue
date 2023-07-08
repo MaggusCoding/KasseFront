@@ -15,7 +15,7 @@
         </div>
         <div class="navbar-nav ms-auto">
           <router-link v-if="!currentUser" class="nav-link" to="/login">Login</router-link>
-          <router-link class="nav-link" to="/register">Sign up</router-link>
+          <router-link v-if="currentUser" class="nav-link" to="/register">Sign up</router-link>
           <a class="nav-link" @click.prevent="logOut" v-if="currentUser">
             Logout
           </a>

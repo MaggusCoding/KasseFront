@@ -55,7 +55,7 @@ export default {
         return
       }
 
-      const endpoint = 'http://localhost:8080/api/mitarbeiter'
+      const endpoint = 'http://tresebackendinternal.railway.internal/api/mitarbeiter'
       const headers = new Headers()
       const user = JSON.parse(localStorage.getItem('user'))
       headers.append('Authorization', 'Bearer ' + user.accessToken)
