@@ -29,7 +29,7 @@ class AuthService {
       password: user.password
     }, {
       headers: {
-        Authorization: 'Bearer ' + user.accessToken // eslint-disable-line
+        'Authorization': 'Bearer ' + user.accessToken // eslint-disable-line
       }
     })
   }
