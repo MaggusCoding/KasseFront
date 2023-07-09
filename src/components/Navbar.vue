@@ -8,7 +8,6 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <router-link class="nav-link" to="/">Home</router-link>
-          <router-link class="nav-link" to="/about">About</router-link>
           <router-link v-if="currentUser" class="nav-link" to="/employee">Employee</router-link>
           <router-link v-if="currentUser" class="nav-link" to="/kassenbuchung">Cash Booking</router-link>
           <router-link v-if="currentUser" class="nav-link" to="/dashboard">Dashboard</router-link>
