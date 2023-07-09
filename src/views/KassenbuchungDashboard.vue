@@ -50,7 +50,7 @@ export default {
       // Get the current month and year
       const currentDate = new Date()
       const currentYear = currentDate.getFullYear()
-      const currentMonth = currentDate.getMonth() + 1 // Adding 1 since getMonth() returns zero-based index
+      const currentMonth = currentDate.getMonth() // Adding 1 since getMonth() returns zero-based index
 
       // Iterate over the map entries and populate the seriesData array
       for (const [date, value] of Object.entries(this.map)) {
