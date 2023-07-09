@@ -46,21 +46,43 @@ export default {
     },
     updateChartData () {
       const seriesData = []
+
+      // Get the current month and year
+      const currentDate = new Date()
+      const currentYear = currentDate.getFullYear()
+      const currentMonth = currentDate.getMonth() + 1 // Adding 1 since getMonth() returns zero-based index
+
       // Iterate over the map entries and populate the seriesData array
       for (const [date, value] of Object.entries(this.map)) {
         // Extract the month and year from the date
         const [year, month] = date.split('-')
-        // Format the month as two digits (e.g., "07")
-        const formattedMonth = month.padStart(2, '0')
-        // Format the year as desired (e.g., "2023")
-        const formattedYear = year
+
+        // Calculate the month and year to display
+        const displayYear = parseInt(year)
+        let displayMonth = parseInt(month)
+
+        // Adjust the display month and year if necessary
+        if (displayYear === currentYear && displayMonth < currentMonth) {
+          // If the month is in the past but within the same year, increment the display month
+          displayMonth++
+        } else if (displayYear < currentYear) {
+          // If the year is in the past, set the display month to the current month
+          displayMonth = currentMonth
+        }
+
+        // Format the month and year as desired (e.g., "07.2023")
+        const formattedMonth = displayMonth.toString().padStart(2, '0')
+        const formattedYear = displayYear.toString()
+
         // Format the date as "MM.YYYY"
         const formattedDate = `${formattedMonth}.${formattedYear}`
+
         // Create an object with 'x' and 'y' properties
         const dataObject = {
           x: formattedDate,
           y: value
         }
+
         // Push the data object to the seriesData array
         seriesData.push(dataObject)
       }
